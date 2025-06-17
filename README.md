@@ -51,10 +51,6 @@ docker compose up --build
 - **Response**: `PlaceBetResponseDTO` containing the bet details
 - **Restrictions**: Each user can place only one bet per event
 
-## Development
-
-The application is built using Spring Boot and follows RESTful API design principles. It includes:
-
 ### Potential Improvements
 
 1. **Input Validation**
