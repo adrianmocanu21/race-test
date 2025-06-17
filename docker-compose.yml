@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: f1bets_postgres
+    environment:
+      POSTGRES_DB: f1bets
+      POSTGRES_USER: f1user
+      POSTGRES_PASSWORD: f1pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  f1bets:
+    container_name: f1bets_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/f1bets
+      SPRING_DATASOURCE_USERNAME: f1user
+      SPRING_DATASOURCE_PASSWORD: f1pass
+
+volumes:
+  postgres_data:
